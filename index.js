@@ -110,7 +110,8 @@ util.inherits(ConnectionError, FloraError);
  * Converts an error object to a stringifyable object format for use
  * in Flora responses.
  *
- * @param {Error} error object
+ * @param {FloraError} err object
+ * @param {Object} options
  */
 function format(err, options) {
     options = options || {};
