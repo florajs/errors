@@ -10,7 +10,6 @@ var util = require('util');
  * @param {string} message
  */
 function FloraError(message) {
-    Error.call(this);
     Error.captureStackTrace(this, this.constructor);
     this.name = this.constructor.name;
 
