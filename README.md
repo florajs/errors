@@ -1,6 +1,9 @@
 Flora Errors
 ============
 
+[![Build Status](https://travis-ci.org/godmodelabs/flora-errors.svg?branch=master)](https://travis-ci.org/godmodelabs/flora-errors)
+[![NPM version](https://badge.fury.io/js/flora-errors.svg)](https://www.npmjs.com/package/flora-errors)
+
 Error definitions for [Flora](https://github.com/godmodelabs/flora).
 
 This module exposes error classes for different types of errors to be able to determine whether an error should be displayed to the client (such as AuthenticationError) or not (internal errors).
@@ -40,4 +43,5 @@ There is a problem with the connection to a data source. May work on retry (e.g.
 
 License
 -------
-MIT
+
+[MIT](LICENSE)
