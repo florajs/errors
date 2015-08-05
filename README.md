@@ -3,6 +3,7 @@ Flora Errors
 
 [![Build Status](https://travis-ci.org/godmodelabs/flora-errors.svg?branch=master)](https://travis-ci.org/godmodelabs/flora-errors)
 [![NPM version](https://badge.fury.io/js/flora-errors.svg)](https://www.npmjs.com/package/flora-errors)
+[![Dependencies](https://img.shields.io/david/godmodelabs/flora-errors.svg)](https://david-dm.org/godmodelabs/flora-errors)
 
 Error definitions for [Flora](https://github.com/godmodelabs/flora).
 
