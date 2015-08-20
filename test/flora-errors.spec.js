@@ -162,5 +162,18 @@ describe('flora-errors', function () {
             var error = errors.format(new NotFoundError('foobar not found'), {exposeErrors: true});
             expect(error.stack).to.be.an('array');
         });
+
+        it('merge additional information from error\'s "info" property', function () {
+             var formatted,
+                 error = new ConnectionError('Cannot connect to api.example.com');
+
+            error.info = {customProp: 'foo', message: 'bar', stack: 'foobar'};
+            formatted = errors.format(error, {exposeErrors: true});
+
+            expect(formatted.customProp).to.equal('foo');
+            // don't overwrite standard properties
+            expect(formatted.message).not.to.equal('bar');
+            expect(formatted.stack).not.to.equal('foobar');
+        });
     });
 });

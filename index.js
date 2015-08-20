@@ -111,24 +111,26 @@ util.inherits(ConnectionError, FloraError);
  * in Flora responses.
  *
  * @param {FloraError} err object
- * @param {Object} options
+ * @param {Object=} options
  */
 function format(err, options) {
+    var error = {message: 'Internal Server Error'};
+
     options = options || {};
 
-    var error = {
-        message: 'Internal Server Error'
-    };
-
-    if (err.httpStatusCode && err.httpStatusCode < 500) {
-        error.message = err.message;
-    }
+    if (err.httpStatusCode && err.httpStatusCode < 500) error.message = err.message;
 
     // TODO: code: err.code ??
 
     if (options.exposeErrors) {
         error.message = err.message;
         error.stack = err.stack.split(/\r?\n/);
+
+        if (err.info) {
+            for (var key in err.info) {
+                if (!error.hasOwnProperty(key) && err.info.hasOwnProperty(key)) error[key] = err.info[key];
+            }
+        }
     }
 
     return error;
