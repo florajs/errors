@@ -32,7 +32,7 @@
     }
   ],
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=6"
   },
   "devDependencies": {
     "chai": "^3.4.1",
