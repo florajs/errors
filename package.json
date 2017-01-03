@@ -13,10 +13,7 @@
   },
   "homepage": "https://github.com/godmodelabs/flora-errors",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/godmodelabs/flora-errors.git"
-  },
+  "repository": "godmodelabs/flora-errors",
   "contributors": [
     {
       "name": "Mark Plomer",
