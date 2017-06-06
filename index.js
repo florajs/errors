@@ -6,7 +6,6 @@ class FloraError extends Error {
     constructor(message, ...args) {
         super(message, ...args);
 
-        Error.captureStackTrace(this, this.constructor);
         this.name = this.constructor.name;
 
         /**
@@ -22,6 +21,8 @@ class FloraError extends Error {
          * @readonly
          */
         this.httpStatusCode = 500; // HTTP status for "other errors"
+
+        Error.captureStackTrace(this, this.constructor);
     }
 }
 
