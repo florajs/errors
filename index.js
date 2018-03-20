@@ -30,6 +30,7 @@ class RequestError extends FloraError {
     constructor(...args) {
         super(...args);
         this.httpStatusCode = 400;
+        this.code = 'ERR_REQUEST_ERROR';
     }
 }
 
@@ -37,6 +38,7 @@ class AuthenticationError extends FloraError {
     constructor(...args) {
         super(...args);
         this.httpStatusCode = 401;
+        this.code = 'ERR_AUTHENTICATION_ERROR';
     }
 }
 
@@ -44,6 +46,7 @@ class AuthorizationError extends FloraError {
     constructor(...args) {
         super(...args);
         this.httpStatusCode = 403;
+        this.code = 'ERR_AUTHORIZATION_ERROR';
     }
 }
 
@@ -51,6 +54,7 @@ class NotFoundError extends FloraError {
     constructor(...args) {
         super(...args);
         this.httpStatusCode = 404;
+        this.code = 'ERR_NOT_FOUND';
     }
 }
 
@@ -58,6 +62,7 @@ class ImplementationError extends FloraError {
     constructor(...args) {
         super(...args);
         this.httpStatusCode = 500;
+        this.code = 'ERR_IMPLEMENTATION_ERROR';
     }
 }
 
@@ -65,6 +70,7 @@ class DataError extends FloraError {
     constructor(...args) {
         super(...args);
         this.httpStatusCode = 500;
+        this.code = 'ERR_DATA_ERROR';
     }
 }
 
@@ -72,6 +78,7 @@ class ConnectionError extends FloraError {
     constructor(...args) {
         super(...args);
         this.httpStatusCode = 503;
+        this.code = 'ERR_CONNECTION_ERROR';
     }
 }
 
@@ -89,8 +96,6 @@ function format(err, options) {
 
     if (err.httpStatusCode && err.httpStatusCode < 500) error.message = err.message;
 
-    // TODO: code: err.code ??
-
     if (options.exposeErrors) {
         error.message = err.message;
         error.stack = err.stack.split(/\r?\n/);
@@ -101,6 +106,8 @@ function format(err, options) {
                     has(err.info, key)) error[key] = err.info[key];
             });
         }
+
+        if (err.code) error.code = err.code;
     }
 
     return error;
