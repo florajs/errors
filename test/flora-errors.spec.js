@@ -21,37 +21,20 @@ function throwError(errorClass) {
 describe('flora-errors', () => {
     describe('RequestError', () => {
         it('has correct class hierarchy (for instanceof)', () => {
-            try {
-                throw new RequestError('an error occurred');
-            } catch (e) {
-                expect(e).to.be.an.instanceof(RequestError);
-                expect(e).to.not.be.an.instanceof(ImplementationError);
-                expect(e).to.be.an.instanceof(Error);
-            }
+            expect(throwError(RequestError))
+                .to.throw(RequestError, 'an error occurred')
+                .and.to.be.instanceOf(Error)
+                .and.not.to.be.instanceOf(ImplementationError);
         });
 
         it('has correct name', () => {
-            try {
-                throw new RequestError('an error occurred');
-            } catch (e) {
-                expect(e.name).to.equal('RequestError');
-            }
+            expect(throwError(RequestError)).to.throw()
+                .and.to.have.property('name', 'RequestError');
         });
 
         it('has correct code', () => {
-            try {
-                throw new RequestError('an error occurred');
-            } catch (e) {
-                expect(e.code).to.equal('ERR_REQUEST_ERROR');
-            }
-        });
-
-        it('passes through message', () => {
-            try {
-                throw new RequestError('an error occurred');
-            } catch (e) {
-                expect(e.message).to.equal('an error occurred');
-            }
+            expect(throwError(RequestError)).to.throw()
+                .and.to.have.property('code', 'ERR_REQUEST_ERROR');
         });
 
         it('has correct stack trace', () => {
@@ -82,121 +65,85 @@ describe('flora-errors', () => {
 
     describe('AuthenticationError', () => {
         it('has correct class hierarchy (for instanceof)', () => {
-            try {
-                throw new AuthenticationError('an error occurred');
-            } catch (e) {
-                expect(e).to.be.an.instanceof(AuthenticationError);
-                expect(e).to.not.be.an.instanceof(ImplementationError);
-                expect(e).to.be.an.instanceof(Error);
-            }
+            expect(throwError(AuthenticationError))
+                .to.throw(AuthenticationError, 'an error occurred')
+                .and.to.be.instanceOf(Error)
+                .and.not.to.be.instanceOf(ImplementationError);
         });
 
         it('has correct code', () => {
-            try {
-                throw new AuthenticationError('an error occurred');
-            } catch (e) {
-                expect(e.code).to.equal('ERR_AUTHENTICATION_ERROR');
-            }
+            expect(throwError(AuthenticationError)).to.throw()
+                .and.to.have.property('code', 'ERR_AUTHENTICATION_ERROR');
         });
     });
 
     describe('AuthorizationError', () => {
         it('has correct class hierarchy (for instanceof)', () => {
-            try {
-                throw new AuthorizationError('an error occurred');
-            } catch (e) {
-                expect(e).to.be.an.instanceof(AuthorizationError);
-                expect(e).to.not.be.an.instanceof(ImplementationError);
-                expect(e).to.be.an.instanceof(Error);
-            }
+            expect(throwError(AuthorizationError))
+                .to.throw(AuthorizationError, 'an error occurred')
+                .and.to.be.instanceOf(Error)
+                .and.not.to.be.instanceOf(ImplementationError);
         });
 
         it('has correct code', () => {
-            try {
-                throw new AuthorizationError('an error occurred');
-            } catch (e) {
-                expect(e.code).to.equal('ERR_AUTHORIZATION_ERROR');
-            }
+            expect(throwError(AuthorizationError)).to.throw()
+                .and.to.have.property('code', 'ERR_AUTHORIZATION_ERROR');
         });
     });
 
     describe('NotFoundError', () => {
         it('has correct class hierarchy (for instanceof)', () => {
-            try {
-                throw new NotFoundError('an error occurred');
-            } catch (e) {
-                expect(e).to.be.an.instanceof(NotFoundError);
-                expect(e).to.not.be.an.instanceof(ImplementationError);
-                expect(e).to.be.an.instanceof(Error);
-            }
+            expect(throwError(NotFoundError))
+                .to.throw(NotFoundError, 'an error occurred')
+                .and.to.be.instanceOf(Error)
+                .and.not.to.be.instanceOf(ImplementationError);
         });
 
         it('has correct code', () => {
-            try {
-                throw new NotFoundError('an error occurred');
-            } catch (e) {
-                expect(e.code).to.equal('ERR_NOT_FOUND');
-            }
+            expect(throwError(NotFoundError)).to.throw()
+                .and.to.have.property('code', 'ERR_NOT_FOUND');
         });
     });
 
     describe('ImplementationError', () => {
         it('has correct class hierarchy (for instanceof)', () => {
-            try {
-                throw new ImplementationError('an error occurred');
-            } catch (e) {
-                expect(e).to.be.an.instanceof(ImplementationError);
-                expect(e).to.not.be.an.instanceof(RequestError);
-                expect(e).to.be.an.instanceof(Error);
-            }
+            expect(throwError(ImplementationError))
+                .to.throw(ImplementationError, 'an error occurred')
+                .and.to.be.instanceOf(Error)
+                .and.not.to.be.instanceOf(RequestError);
         });
 
         it('has correct code', () => {
-            try {
-                throw new ImplementationError('an error occurred');
-            } catch (e) {
-                expect(e.code).to.equal('ERR_IMPLEMENTATION_ERROR');
-            }
+            expect(throwError(ImplementationError)).to.throw()
+                .and.to.have.property('code', 'ERR_IMPLEMENTATION_ERROR');
         });
     });
 
     describe('DataError', () => {
         it('has correct class hierarchy (for instanceof)', () => {
-            try {
-                throw new DataError('an error occurred');
-            } catch (e) {
-                expect(e).to.be.an.instanceof(DataError);
-                expect(e).to.not.be.an.instanceof(ImplementationError);
-                expect(e).to.be.an.instanceof(Error);
-            }
+            expect(throwError(DataError))
+                .to.throw(DataError, 'an error occurred')
+                .and.to.be.instanceOf(Error)
+                .and.not.to.be.instanceOf(ImplementationError);
         });
 
         it('has correct code', () => {
-            try {
-                throw new DataError('an error occurred');
-            } catch (e) {
-                expect(e.code).to.equal('ERR_DATA_ERROR');
-            }
+            expect(throwError(DataError)).to.throw()
+                .and.to.have.property('code', 'ERR_DATA_ERROR');
         });
     });
 
     describe('ConnectionError', () => {
         it('has correct class hierarchy (for instanceof)', () => {
-            try {
-                throw new ConnectionError('an error occurred');
-            } catch (e) {
-                expect(e).to.be.an.instanceof(ConnectionError);
-                expect(e).to.not.be.an.instanceof(ImplementationError);
-                expect(e).to.be.an.instanceof(Error);
-            }
+            expect(throwError(ConnectionError))
+                .to.throw(ConnectionError, 'an error occurred')
+                .and.to.be.instanceOf(Error)
+                .and.not.to.be.instanceOf(ImplementationError);
         });
 
         it('has correct code', () => {
-            try {
-                throw new ConnectionError('an error occurred');
-            } catch (e) {
-                expect(e.code).to.equal('ERR_CONNECTION_ERROR');
-            }
+            expect(throwError(ConnectionError)).to.throw()
+                .and.to.have.property('code', 'ERR_CONNECTION_ERROR');
         });
     });
 
