@@ -1,19 +1,26 @@
 'use strict';
 
-var errors = require('..');
-var RequestError = errors.RequestError;
-var AuthenticationError = errors.AuthenticationError;
-var AuthorizationError = errors.AuthorizationError;
-var NotFoundError = errors.NotFoundError;
-var ImplementationError = errors.ImplementationError;
-var ConnectionError = errors.ConnectionError;
-var DataError = errors.DataError;
+const { expect } = require('chai');
+const {
+    RequestError,
+    AuthenticationError,
+    AuthorizationError,
+    NotFoundError,
+    ImplementationError,
+    ConnectionError,
+    DataError,
+    format
+} = require('..');
 
-var expect = require('chai').expect;
+function throwError(errorClass) {
+    return () => {
+        throw new errorClass('an error occurred');
+    };
+}
 
-describe('flora-errors', function () {
-    describe('RequestError', function () {
-        it('has correct class hierarchy (for instanceof)', function () {
+describe('flora-errors', () => {
+    describe('RequestError', () => {
+        it('has correct class hierarchy (for instanceof)', () => {
             try {
                 throw new RequestError('an error occurred');
             } catch (e) {
@@ -23,7 +30,7 @@ describe('flora-errors', function () {
             }
         });
 
-        it('has correct name', function () {
+        it('has correct name', () => {
             try {
                 throw new RequestError('an error occurred');
             } catch (e) {
@@ -31,7 +38,7 @@ describe('flora-errors', function () {
             }
         });
 
-        it('has correct code', function () {
+        it('has correct code', () => {
             try {
                 throw new RequestError('an error occurred');
             } catch (e) {
@@ -39,7 +46,7 @@ describe('flora-errors', function () {
             }
         });
 
-        it('passes through message', function () {
+        it('passes through message', () => {
             try {
                 throw new RequestError('an error occurred');
             } catch (e) {
@@ -47,8 +54,8 @@ describe('flora-errors', function () {
             }
         });
 
-        it('has correct stack trace', function () {
-            var expectedStackTrace;
+        it('has correct stack trace', () => {
+            let expectedStackTrace;
 
             try {
                 expectedStackTrace =
@@ -62,7 +69,7 @@ describe('flora-errors', function () {
                 expectedStackTrace[0] = 'Request' + expectedStackTrace[0];
 
                 // add 1 to expected line number (identical column number):
-                expectedStackTrace[1] = expectedStackTrace[1].replace(/:(\d+):(\d+)\)$/g, function (match, lineNumber, columnNumber) {
+                expectedStackTrace[1] = expectedStackTrace[1].replace(/:(\d+):(\d+)\)$/g, (match, lineNumber, columnNumber) => {
                     return ':' + (parseInt(lineNumber) + 1) + ':' + columnNumber + ')';
                 });
 
@@ -73,8 +80,8 @@ describe('flora-errors', function () {
         });
     });
 
-    describe('AuthenticationError', function () {
-        it('has correct class hierarchy (for instanceof)', function () {
+    describe('AuthenticationError', () => {
+        it('has correct class hierarchy (for instanceof)', () => {
             try {
                 throw new AuthenticationError('an error occurred');
             } catch (e) {
@@ -84,7 +91,7 @@ describe('flora-errors', function () {
             }
         });
 
-        it('has correct code', function () {
+        it('has correct code', () => {
             try {
                 throw new AuthenticationError('an error occurred');
             } catch (e) {
@@ -93,8 +100,8 @@ describe('flora-errors', function () {
         });
     });
 
-    describe('AuthorizationError', function () {
-        it('has correct class hierarchy (for instanceof)', function () {
+    describe('AuthorizationError', () => {
+        it('has correct class hierarchy (for instanceof)', () => {
             try {
                 throw new AuthorizationError('an error occurred');
             } catch (e) {
@@ -104,7 +111,7 @@ describe('flora-errors', function () {
             }
         });
 
-        it('has correct code', function () {
+        it('has correct code', () => {
             try {
                 throw new AuthorizationError('an error occurred');
             } catch (e) {
@@ -113,8 +120,8 @@ describe('flora-errors', function () {
         });
     });
 
-    describe('NotFoundError', function () {
-        it('has correct class hierarchy (for instanceof)', function () {
+    describe('NotFoundError', () => {
+        it('has correct class hierarchy (for instanceof)', () => {
             try {
                 throw new NotFoundError('an error occurred');
             } catch (e) {
@@ -124,7 +131,7 @@ describe('flora-errors', function () {
             }
         });
 
-        it('has correct code', function () {
+        it('has correct code', () => {
             try {
                 throw new NotFoundError('an error occurred');
             } catch (e) {
@@ -133,8 +140,8 @@ describe('flora-errors', function () {
         });
     });
 
-    describe('ImplementationError', function () {
-        it('has correct class hierarchy (for instanceof)', function () {
+    describe('ImplementationError', () => {
+        it('has correct class hierarchy (for instanceof)', () => {
             try {
                 throw new ImplementationError('an error occurred');
             } catch (e) {
@@ -144,7 +151,7 @@ describe('flora-errors', function () {
             }
         });
 
-        it('has correct code', function () {
+        it('has correct code', () => {
             try {
                 throw new ImplementationError('an error occurred');
             } catch (e) {
@@ -153,8 +160,8 @@ describe('flora-errors', function () {
         });
     });
 
-    describe('DataError', function () {
-        it('has correct class hierarchy (for instanceof)', function () {
+    describe('DataError', () => {
+        it('has correct class hierarchy (for instanceof)', () => {
             try {
                 throw new DataError('an error occurred');
             } catch (e) {
@@ -164,7 +171,7 @@ describe('flora-errors', function () {
             }
         });
 
-        it('has correct code', function () {
+        it('has correct code', () => {
             try {
                 throw new DataError('an error occurred');
             } catch (e) {
@@ -173,8 +180,8 @@ describe('flora-errors', function () {
         });
     });
 
-    describe('ConnectionError', function () {
-        it('has correct class hierarchy (for instanceof)', function () {
+    describe('ConnectionError', () => {
+        it('has correct class hierarchy (for instanceof)', () => {
             try {
                 throw new ConnectionError('an error occurred');
             } catch (e) {
@@ -184,7 +191,7 @@ describe('flora-errors', function () {
             }
         });
 
-        it('has correct code', function () {
+        it('has correct code', () => {
             try {
                 throw new ConnectionError('an error occurred');
             } catch (e) {
@@ -193,43 +200,42 @@ describe('flora-errors', function () {
         });
     });
 
-    describe('formatting', function () {
-        it('passes through error message for NotFoundError', function () {
-            var error = errors.format(new NotFoundError('foobar not found'));
+    describe('formatting', () => {
+        it('passes through error message for NotFoundError', () => {
+            const error = format(new NotFoundError('foobar not found'));
             expect(error.message).to.equal('foobar not found');
         });
 
-        it('passes through error code', function () {
-            var error = errors.format(new NotFoundError('foobar not found'));
+        it('passes through error code', () => {
+            const error = format(new NotFoundError('foobar not found'));
             expect(error.code).to.equal('ERR_NOT_FOUND');
         });
 
-        it('hides error message for ImplementationError', function () {
-            var error = errors.format(new ImplementationError('foobar error'));
+        it('hides error message for ImplementationError', () => {
+            const error = format(new ImplementationError('foobar error'));
             expect(error.message).to.equal('Internal Server Error');
         });
 
-        it('never passes through stack-trace', function () {
-            var error = errors.format(new NotFoundError('foobar not found'));
+        it('never passes through stack-trace', () => {
+            const error = format(new NotFoundError('foobar not found'));
             expect(error.stack).to.be.undefined;
         });
 
-        it('always passes through error message when exposeErrors = true', function () {
-            var error = errors.format(new ImplementationError('foobar error'), {exposeErrors: true});
+        it('always passes through error message when exposeErrors = true', () => {
+            const error = format(new ImplementationError('foobar error'), {exposeErrors: true});
             expect(error.message).to.equal('foobar error');
         });
 
-        it('always passes through stack-trace when exposeErrors = true', function () {
-            var error = errors.format(new NotFoundError('foobar not found'), {exposeErrors: true});
+        it('always passes through stack-trace when exposeErrors = true', () => {
+            const error = format(new NotFoundError('foobar not found'), {exposeErrors: true});
             expect(error.stack).to.be.an('array');
         });
 
-        it('merge additional information from error\'s "info" property', function () {
-             var formatted,
-                 error = new ConnectionError('Cannot connect to api.example.com');
+        it('merge additional information from error\'s "info" property', () => {
+            const error = new ConnectionError('Cannot connect to api.example.com');
 
             error.info = {customProp: 'foo', message: 'bar', stack: 'foobar'};
-            formatted = errors.format(error, {exposeErrors: true});
+            const formatted = format(error, {exposeErrors: true});
 
             expect(formatted.customProp).to.equal('foo');
             // don't overwrite standard properties
