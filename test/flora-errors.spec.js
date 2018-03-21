@@ -31,6 +31,14 @@ describe('flora-errors', function () {
             }
         });
 
+        it('has correct code', function () {
+            try {
+                throw new RequestError('an error occurred');
+            } catch (e) {
+                expect(e.code).to.equal('ERR_REQUEST_ERROR');
+            }
+        });
+
         it('passes through message', function () {
             try {
                 throw new RequestError('an error occurred');
@@ -75,6 +83,14 @@ describe('flora-errors', function () {
                 expect(e).to.be.an.instanceof(Error);
             }
         });
+
+        it('has correct code', function () {
+            try {
+                throw new AuthenticationError('an error occurred');
+            } catch (e) {
+                expect(e.code).to.equal('ERR_AUTHENTICATION_ERROR');
+            }
+        });
     });
 
     describe('AuthorizationError', function () {
@@ -85,6 +101,14 @@ describe('flora-errors', function () {
                 expect(e).to.be.an.instanceof(AuthorizationError);
                 expect(e).to.not.be.an.instanceof(ImplementationError);
                 expect(e).to.be.an.instanceof(Error);
+            }
+        });
+
+        it('has correct code', function () {
+            try {
+                throw new AuthorizationError('an error occurred');
+            } catch (e) {
+                expect(e.code).to.equal('ERR_AUTHORIZATION_ERROR');
             }
         });
     });
@@ -99,6 +123,14 @@ describe('flora-errors', function () {
                 expect(e).to.be.an.instanceof(Error);
             }
         });
+
+        it('has correct code', function () {
+            try {
+                throw new NotFoundError('an error occurred');
+            } catch (e) {
+                expect(e.code).to.equal('ERR_NOT_FOUND');
+            }
+        });
     });
 
     describe('ImplementationError', function () {
@@ -109,6 +141,14 @@ describe('flora-errors', function () {
                 expect(e).to.be.an.instanceof(ImplementationError);
                 expect(e).to.not.be.an.instanceof(RequestError);
                 expect(e).to.be.an.instanceof(Error);
+            }
+        });
+
+        it('has correct code', function () {
+            try {
+                throw new ImplementationError('an error occurred');
+            } catch (e) {
+                expect(e.code).to.equal('ERR_IMPLEMENTATION_ERROR');
             }
         });
     });
@@ -123,6 +163,14 @@ describe('flora-errors', function () {
                 expect(e).to.be.an.instanceof(Error);
             }
         });
+
+        it('has correct code', function () {
+            try {
+                throw new DataError('an error occurred');
+            } catch (e) {
+                expect(e.code).to.equal('ERR_DATA_ERROR');
+            }
+        });
     });
 
     describe('ConnectionError', function () {
@@ -135,12 +183,25 @@ describe('flora-errors', function () {
                 expect(e).to.be.an.instanceof(Error);
             }
         });
+
+        it('has correct code', function () {
+            try {
+                throw new ConnectionError('an error occurred');
+            } catch (e) {
+                expect(e.code).to.equal('ERR_CONNECTION_ERROR');
+            }
+        });
     });
 
     describe('formatting', function () {
         it('passes through error message for NotFoundError', function () {
             var error = errors.format(new NotFoundError('foobar not found'));
             expect(error.message).to.equal('foobar not found');
+        });
+
+        it('passes through error code', function () {
+            var error = errors.format(new NotFoundError('foobar not found'));
+            expect(error.code).to.equal('ERR_NOT_FOUND');
         });
 
         it('hides error message for ImplementationError', function () {

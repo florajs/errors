@@ -96,6 +96,8 @@ function format(err, options) {
 
     if (err.httpStatusCode && err.httpStatusCode < 500) error.message = err.message;
 
+    if (err.code) error.code = err.code;
+
     if (options.exposeErrors) {
         error.message = err.message;
         error.stack = err.stack.split(/\r?\n/);
@@ -106,8 +108,6 @@ function format(err, options) {
                     has(err.info, key)) error[key] = err.info[key];
             });
         }
-
-        if (err.code) error.code = err.code;
     }
 
     return error;
