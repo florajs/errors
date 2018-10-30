@@ -104,8 +104,8 @@ function format(err, options) {
 
         if (err.info) {
             Object.keys(err.info).forEach((key) => {
-                if (!has(error, key) &&
-                    has(err.info, key)) error[key] = err.info[key];
+                if (!has(error, key)
+                    && has(err.info, key)) error[key] = err.info[key];
             });
         }
     }

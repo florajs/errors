@@ -4,7 +4,8 @@
   "description": "Error definitions for Flora",
   "main": "index.js",
   "scripts": {
-    "test": "grunt test",
+    "bamboo": "mocha -R mocha-bamboo-reporter",
+    "test": "mocha",
     "lint": "eslint index.js"
   },
   "author": {
@@ -29,22 +30,14 @@
     }
   ],
   "engines": {
-    "node": ">=6"
+    "node": ">=8"
   },
   "devDependencies": {
     "@types/chai": "^4.1.2",
-    "chai": "^4.1.2",
-    "eslint": "^4.19.0",
-    "eslint-config-airbnb-base": "^12.1.0",
+    "chai": "^4.1.7",
+    "eslint": "^5.8.0",
+    "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.7.0",
-    "grunt": "^1.0.1",
-    "grunt-cli": "^1.2.0",
-    "grunt-contrib-clean": "^1.0.0",
-    "grunt-eslint": "^20.1.0",
-    "grunt-mocha-istanbul": "^5.0.1",
-    "grunt-mocha-test": "^0.13.2",
-    "istanbul": "^0.4.2",
-    "load-grunt-tasks": "^3.4.0",
     "mocha": "^5.0.4",
     "mocha-bamboo-reporter": "^1.1.0"
   },
