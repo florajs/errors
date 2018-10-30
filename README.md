@@ -1,5 +1,4 @@
-Flora Errors
-============
+# Flora Errors
 
 [![Build Status](https://travis-ci.org/godmodelabs/flora-errors.svg?branch=master)](https://travis-ci.org/godmodelabs/flora-errors)
 [![NPM version](https://badge.fury.io/js/flora-errors.svg)](https://www.npmjs.com/package/flora-errors)
@@ -11,9 +10,7 @@ This module exposes error classes for different types of errors to be able to de
 
 To be able to pass through the error type to clients, a `code` property is also set. The default error codes are listed below.
 
-
-Error classes
--------------
+## Error classes
 
 ### RequestError
 
@@ -50,8 +47,6 @@ Error code is `ERR_DATA_ERROR`.
 There is a problem with the connection to a data source. May work on retry (e.g. temporary network problems). HTTP status code `503`.
 Error code is `ERR_CONNECTION_ERROR`.
 
-
-License
--------
+## License
 
 [MIT](LICENSE)
