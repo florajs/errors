@@ -103,9 +103,8 @@ function format(err, options) {
         error.stack = err.stack.split(/\r?\n/);
 
         if (err.info) {
-            Object.keys(err.info).forEach((key) => {
-                if (!has(error, key)
-                    && has(err.info, key)) error[key] = err.info[key];
+            Object.keys(err.info).forEach(key => {
+                if (!has(error, key) && has(err.info, key)) error[key] = err.info[key];
             });
         }
     }
