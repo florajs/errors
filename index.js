@@ -100,7 +100,7 @@ function format(err, options) {
 
     if (options.exposeErrors) {
         error.message = err.message;
-        error.stack = err.stack.split(/\r?\n/);
+        if (err.stack) error.stack = err.stack.split(/\r?\n/);
 
         if (err.info) {
             Object.keys(err.info).forEach(key => {
