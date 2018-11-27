@@ -1,6 +1,6 @@
 {
   "name": "flora-errors",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "Error definitions for Flora",
   "main": "index.js",
   "scripts": {
