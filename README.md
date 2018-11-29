@@ -47,6 +47,11 @@ Error code is `ERR_DATA_ERROR`.
 There is a problem with the connection to a data source. May work on retry (e.g. temporary network problems). HTTP status code `503`.
 Error code is `ERR_CONNECTION_ERROR`.
 
+### ValidationError
+
+There is a problem validating input data. This is a special case of `RequestError`. HTTP status code `400`.
+Error code is `ERR_VALIDATION_ERROR`. Second parameter of constructor will be added as additional `validation` property.
+
 ## License
 
 [MIT](LICENSE)

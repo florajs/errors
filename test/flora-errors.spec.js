@@ -1,3 +1,5 @@
+/* global describe, it */
+
 'use strict';
 
 const { expect } = require('chai');
@@ -9,6 +11,7 @@ const {
     ImplementationError,
     ConnectionError,
     DataError,
+    ValidationError,
     format
 } = require('..');
 
@@ -28,37 +31,38 @@ describe('flora-errors', () => {
         });
 
         it('has correct name', () => {
-            expect(throwError(RequestError)).to.throw()
+            expect(throwError(RequestError))
+                .to.throw()
                 .and.to.have.property('name', 'RequestError');
         });
 
         it('has correct code', () => {
-            expect(throwError(RequestError)).to.throw()
+            expect(throwError(RequestError))
+                .to.throw()
                 .and.to.have.property('code', 'ERR_REQUEST_ERROR');
         });
 
         it('has correct stack trace', () => {
-            let expectedStackTrace;
+            let est;
 
             try {
-                expectedStackTrace =
-                      new Error('msg').stack; // indent of "new" must match the "new" in next line
+                est = new Error('msg').stack; // indent of "new" must match the "new" in next line
                 throw new RequestError('msg');
             } catch (e) {
                 // adjust expected stack-trace:
-                expectedStackTrace = expectedStackTrace.split('\n');
+                est = est.split('\n');
 
                 // set expected name of error:
-                expectedStackTrace[0] = 'Request' + expectedStackTrace[0];
+                est[0] = 'Request' + est[0];
 
                 // add 1 to expected line number (identical column number):
-                expectedStackTrace[1] = expectedStackTrace[1].replace(/:(\d+):(\d+)\)$/g, (match, lineNumber, columnNumber) => {
+                est[1] = est[1].replace(/:(\d+):(\d+)\)$/g, (match, lineNumber, columnNumber) => {
                     return ':' + (parseInt(lineNumber) + 1) + ':' + columnNumber + ')';
                 });
 
-                expectedStackTrace = expectedStackTrace.join('\n');
+                est = est.join('\n');
 
-                expect(e.stack).to.equal(expectedStackTrace);
+                expect(e.stack).to.equal(est);
             }
         });
     });
@@ -72,7 +76,8 @@ describe('flora-errors', () => {
         });
 
         it('has correct code', () => {
-            expect(throwError(AuthenticationError)).to.throw()
+            expect(throwError(AuthenticationError))
+                .to.throw()
                 .and.to.have.property('code', 'ERR_AUTHENTICATION_ERROR');
         });
     });
@@ -86,7 +91,8 @@ describe('flora-errors', () => {
         });
 
         it('has correct code', () => {
-            expect(throwError(AuthorizationError)).to.throw()
+            expect(throwError(AuthorizationError))
+                .to.throw()
                 .and.to.have.property('code', 'ERR_AUTHORIZATION_ERROR');
         });
     });
@@ -100,7 +106,8 @@ describe('flora-errors', () => {
         });
 
         it('has correct code', () => {
-            expect(throwError(NotFoundError)).to.throw()
+            expect(throwError(NotFoundError))
+                .to.throw()
                 .and.to.have.property('code', 'ERR_NOT_FOUND');
         });
     });
@@ -114,7 +121,8 @@ describe('flora-errors', () => {
         });
 
         it('has correct code', () => {
-            expect(throwError(ImplementationError)).to.throw()
+            expect(throwError(ImplementationError))
+                .to.throw()
                 .and.to.have.property('code', 'ERR_IMPLEMENTATION_ERROR');
         });
     });
@@ -128,7 +136,8 @@ describe('flora-errors', () => {
         });
 
         it('has correct code', () => {
-            expect(throwError(DataError)).to.throw()
+            expect(throwError(DataError))
+                .to.throw()
                 .and.to.have.property('code', 'ERR_DATA_ERROR');
         });
     });
@@ -142,8 +151,32 @@ describe('flora-errors', () => {
         });
 
         it('has correct code', () => {
-            expect(throwError(ConnectionError)).to.throw()
+            expect(throwError(ConnectionError))
+                .to.throw()
                 .and.to.have.property('code', 'ERR_CONNECTION_ERROR');
+        });
+    });
+
+    describe('ValidationError', () => {
+        it('has correct class hierarchy (for instanceof)', () => {
+            expect(throwError(ValidationError))
+                .to.throw(ValidationError, 'an error occurred')
+                .and.to.be.instanceOf(RequestError)
+                .and.not.to.be.instanceOf(ImplementationError);
+        });
+
+        it('has correct code', () => {
+            expect(throwError(ValidationError))
+                .to.throw()
+                .and.to.have.property('code', 'ERR_VALIDATION_ERROR');
+        });
+
+        it('passes through validation property', () => {
+            expect(() => {
+                throw new ValidationError('foo', 'bar');
+            })
+                .to.throw()
+                .and.to.have.property('validation', 'bar');
         });
     });
 
@@ -169,25 +202,30 @@ describe('flora-errors', () => {
         });
 
         it('always passes through error message when exposeErrors = true', () => {
-            const error = format(new ImplementationError('foobar error'), {exposeErrors: true});
+            const error = format(new ImplementationError('foobar error'), { exposeErrors: true });
             expect(error.message).to.equal('foobar error');
         });
 
         it('always passes through stack-trace when exposeErrors = true', () => {
-            const error = format(new NotFoundError('foobar not found'), {exposeErrors: true});
+            const error = format(new NotFoundError('foobar not found'), { exposeErrors: true });
             expect(error.stack).to.be.an('array');
         });
 
         it('merge additional information from error\'s "info" property', () => {
             const error = new ConnectionError('Cannot connect to api.example.com');
 
-            error.info = {customProp: 'foo', message: 'bar', stack: 'foobar'};
-            const formatted = format(error, {exposeErrors: true});
+            error.info = { customProp: 'foo', message: 'bar', stack: 'foobar' };
+            const formatted = format(error, { exposeErrors: true });
 
             expect(formatted.customProp).to.equal('foo');
             // don't overwrite standard properties
             expect(formatted.message).not.to.equal('bar');
             expect(formatted.stack).not.to.equal('foobar');
+        });
+
+        it('passes through validation property for ValidationError', () => {
+            const error = format(new ValidationError('foobar error', 'META'));
+            expect(error.validation).to.equal('META');
         });
     });
 });

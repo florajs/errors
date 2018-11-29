@@ -82,6 +82,14 @@ class ConnectionError extends FloraError {
     }
 }
 
+class ValidationError extends RequestError {
+    constructor(message, validation) {
+        super(message);
+        this.code = 'ERR_VALIDATION_ERROR';
+        this.validation = validation;
+    }
+}
+
 /**
  * Converts an error object to a stringifyable object format for use
  * in Flora responses.
@@ -97,6 +105,7 @@ function format(err, options) {
     if (err.httpStatusCode && err.httpStatusCode < 500) error.message = err.message;
 
     if (err.code) error.code = err.code;
+    if (err.validation) error.validation = err.validation;
 
     if (options.exposeErrors) {
         error.message = err.message;
@@ -120,6 +129,7 @@ module.exports = {
     ImplementationError,
     DataError,
     ConnectionError,
+    ValidationError,
     FloraError,
     format
 };
