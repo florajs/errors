@@ -186,9 +186,14 @@ describe('flora-errors', () => {
             expect(error.message).to.equal('foobar not found');
         });
 
-        it('passes through error code', () => {
+        it('passes through error code for NotFoundError', () => {
             const error = format(new NotFoundError('foobar not found'));
             expect(error.code).to.equal('ERR_NOT_FOUND');
+        });
+
+        it('hides error code for ImplementationError', () => {
+            const error = format(new ImplementationError('foobar error'));
+            expect(error.code).to.be.undefined;
         });
 
         it('hides error message for ImplementationError', () => {
@@ -199,6 +204,11 @@ describe('flora-errors', () => {
         it('never passes through stack-trace', () => {
             const error = format(new NotFoundError('foobar not found'));
             expect(error.stack).to.be.undefined;
+        });
+
+        it('always passes through error code when exposeErrors = true', () => {
+            const error = format(new ImplementationError('foobar error'), { exposeErrors: true });
+            expect(error.code).to.equal('ERR_IMPLEMENTATION_ERROR');
         });
 
         it('always passes through error message when exposeErrors = true', () => {
