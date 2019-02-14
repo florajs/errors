@@ -102,13 +102,13 @@ function format(err, options) {
 
     options = options || {};
 
-    if (err.httpStatusCode && err.httpStatusCode < 500) error.message = err.message;
-
-    if (err.code) error.code = err.code;
-    if (err.validation) error.validation = err.validation;
+    if (options.exposeErrors || (err.httpStatusCode && err.httpStatusCode < 500)) {
+        error.message = err.message;
+        if (err.code) error.code = err.code;
+        if (err.validation) error.validation = err.validation;
+    }
 
     if (options.exposeErrors) {
-        error.message = err.message;
         if (err.stack) error.stack = err.stack.split(/\r?\n/);
 
         if (err.info) {
