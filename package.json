@@ -34,15 +34,15 @@
   },
   "devDependencies": {
     "@types/chai": "^4.1.7",
-    "chai": "^4.1.7",
-    "eslint": "^5.13.0",
-    "eslint-config-prettier": "^4.0.0",
-    "eslint-plugin-prettier": "^3.0.0",
-    "mocha": "^5.0.4",
+    "chai": "^4.2.0",
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^4.1.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "mocha": "^6.1.4",
     "pre-commit": "^1.2.2",
-    "prettier": "^1.15.2"
+    "prettier": "^1.17.0"
   },
   "dependencies": {
-    "has": "^1.0.1"
+    "has": "^1.0.3"
   }
 }
