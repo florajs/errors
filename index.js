@@ -1,7 +1,5 @@
 'use strict';
 
-const has = require('has');
-
 class FloraError extends Error {
     constructor(message, ...args) {
         super(message, ...args);
@@ -113,7 +111,11 @@ function format(err, options) {
 
         if (err.info) {
             Object.keys(err.info).forEach(key => {
-                if (!has(error, key) && has(err.info, key)) error[key] = err.info[key];
+                if (
+                    !Object.prototype.hasOwnProperty.call(error, key) &&
+                    Object.prototype.hasOwnProperty.call(err.info, key)
+                )
+                    error[key] = err.info[key];
             });
         }
     }
