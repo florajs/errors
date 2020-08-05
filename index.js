@@ -110,7 +110,7 @@ function format(err, options) {
         if (err.stack) error.stack = err.stack.split(/\r?\n/);
 
         if (err.info) {
-            Object.keys(err.info).forEach(key => {
+            Object.keys(err.info).forEach((key) => {
                 if (
                     !Object.prototype.hasOwnProperty.call(error, key) &&
                     Object.prototype.hasOwnProperty.call(err.info, key)

@@ -31,15 +31,11 @@ describe('flora-errors', () => {
         });
 
         it('has correct name', () => {
-            expect(throwError(RequestError))
-                .to.throw()
-                .and.to.have.property('name', 'RequestError');
+            expect(throwError(RequestError)).to.throw().and.to.have.property('name', 'RequestError');
         });
 
         it('has correct code', () => {
-            expect(throwError(RequestError))
-                .to.throw()
-                .and.to.have.property('code', 'ERR_REQUEST_ERROR');
+            expect(throwError(RequestError)).to.throw().and.to.have.property('code', 'ERR_REQUEST_ERROR');
         });
 
         it('has correct stack trace', () => {
@@ -76,9 +72,7 @@ describe('flora-errors', () => {
         });
 
         it('has correct code', () => {
-            expect(throwError(AuthenticationError))
-                .to.throw()
-                .and.to.have.property('code', 'ERR_AUTHENTICATION_ERROR');
+            expect(throwError(AuthenticationError)).to.throw().and.to.have.property('code', 'ERR_AUTHENTICATION_ERROR');
         });
     });
 
@@ -91,9 +85,7 @@ describe('flora-errors', () => {
         });
 
         it('has correct code', () => {
-            expect(throwError(AuthorizationError))
-                .to.throw()
-                .and.to.have.property('code', 'ERR_AUTHORIZATION_ERROR');
+            expect(throwError(AuthorizationError)).to.throw().and.to.have.property('code', 'ERR_AUTHORIZATION_ERROR');
         });
     });
 
@@ -106,9 +98,7 @@ describe('flora-errors', () => {
         });
 
         it('has correct code', () => {
-            expect(throwError(NotFoundError))
-                .to.throw()
-                .and.to.have.property('code', 'ERR_NOT_FOUND');
+            expect(throwError(NotFoundError)).to.throw().and.to.have.property('code', 'ERR_NOT_FOUND');
         });
     });
 
@@ -121,9 +111,7 @@ describe('flora-errors', () => {
         });
 
         it('has correct code', () => {
-            expect(throwError(ImplementationError))
-                .to.throw()
-                .and.to.have.property('code', 'ERR_IMPLEMENTATION_ERROR');
+            expect(throwError(ImplementationError)).to.throw().and.to.have.property('code', 'ERR_IMPLEMENTATION_ERROR');
         });
     });
 
@@ -136,9 +124,7 @@ describe('flora-errors', () => {
         });
 
         it('has correct code', () => {
-            expect(throwError(DataError))
-                .to.throw()
-                .and.to.have.property('code', 'ERR_DATA_ERROR');
+            expect(throwError(DataError)).to.throw().and.to.have.property('code', 'ERR_DATA_ERROR');
         });
     });
 
@@ -151,9 +137,7 @@ describe('flora-errors', () => {
         });
 
         it('has correct code', () => {
-            expect(throwError(ConnectionError))
-                .to.throw()
-                .and.to.have.property('code', 'ERR_CONNECTION_ERROR');
+            expect(throwError(ConnectionError)).to.throw().and.to.have.property('code', 'ERR_CONNECTION_ERROR');
         });
     });
 
@@ -166,9 +150,7 @@ describe('flora-errors', () => {
         });
 
         it('has correct code', () => {
-            expect(throwError(ValidationError))
-                .to.throw()
-                .and.to.have.property('code', 'ERR_VALIDATION_ERROR');
+            expect(throwError(ValidationError)).to.throw().and.to.have.property('code', 'ERR_VALIDATION_ERROR');
         });
 
         it('passes through validation property', () => {
