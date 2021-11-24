@@ -182,9 +182,19 @@ describe('flora-errors', () => {
             expect(error.message).to.equal('foobar not found');
         });
 
+        it('passes through error message for GoneError', () => {
+            const error = format(new GoneError('foobar was deleted'));
+            expect(error.message).to.equal('foobar was deleted');
+        });
+
         it('passes through error code for NotFoundError', () => {
             const error = format(new NotFoundError('foobar not found'));
             expect(error.code).to.equal('ERR_NOT_FOUND');
+        });
+
+        it('passes through error code for GoneError', () => {
+            const error = format(new GoneError('foobar was deleted'));
+            expect(error.code).to.equal('ERR_GONE');
         });
 
         it('hides error code for ImplementationError', () => {
