@@ -56,6 +56,14 @@ class NotFoundError extends FloraError {
     }
 }
 
+class GoneError extends FloraError {
+    constructor(...args) {
+        super(...args);
+        this.httpStatusCode = 410;
+        this.code = 'ERR_GONE';
+    }
+}
+
 class ImplementationError extends FloraError {
     constructor(...args) {
         super(...args);
@@ -128,6 +136,7 @@ module.exports = {
     AuthenticationError,
     AuthorizationError,
     NotFoundError,
+    GoneError,
     ImplementationError,
     DataError,
     ConnectionError,

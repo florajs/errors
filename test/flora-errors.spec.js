@@ -8,6 +8,7 @@ const {
     AuthenticationError,
     AuthorizationError,
     NotFoundError,
+    GoneError,
     ImplementationError,
     ConnectionError,
     DataError,
@@ -99,6 +100,19 @@ describe('flora-errors', () => {
 
         it('has correct code', () => {
             expect(throwError(NotFoundError)).to.throw().and.to.have.property('code', 'ERR_NOT_FOUND');
+        });
+    });
+
+    describe('GoneError', () => {
+        it('has correct class hierarchy (for instanceof)', () => {
+            expect(throwError(GoneError))
+                .to.throw(GoneError, 'an error occurred')
+                .and.to.be.instanceOf(Error)
+                .and.not.to.be.instanceOf(ImplementationError);
+        });
+
+        it('has correct code', () => {
+            expect(throwError(GoneError)).to.throw().and.to.have.property('code', 'ERR_GONE');
         });
     });
 
