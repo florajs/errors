@@ -15,9 +15,9 @@
     "name": "BörseGo AG",
     "email": "it@boerse-go.de"
   },
-  "homepage": "https://github.com/godmodelabs/flora-errors",
+  "homepage": "https://github.com/florajs/errors",
   "license": "MIT",
-  "repository": "godmodelabs/flora-errors",
+  "repository": "florajs/errors",
   "contributors": [
     {
       "name": "Mark Plomer",
