@@ -20,7 +20,7 @@ function throwError(errorClass) {
     };
 }
 
-describe('flora-errors', () => {
+describe('errors', () => {
     describe('RequestError', () => {
         it('has correct class hierarchy (for instanceof)', () => {
             expect(throwError(RequestError))
