@@ -1,10 +1,10 @@
 # flora-errors
 
-![](https://github.com/godmodelabs/flora-errors/workflows/ci/badge.svg)
+![](https://github.com/florajs/errors/workflows/ci/badge.svg)
 [![NPM version](https://img.shields.io/npm/v/flora-errors.svg?style=flat)](https://www.npmjs.com/package/flora-errors)
 [![NPM downloads](https://img.shields.io/npm/dm/flora-errors.svg?style=flat)](https://www.npmjs.com/package/flora-errors)
 
-Error definitions for [Flora](https://github.com/godmodelabs/flora).
+Error definitions for [Flora](https://github.com/florajs/flora).
 
 This module exposes error classes for different types of errors to be able to determine whether an error should be displayed to the client (such as AuthenticationError) or not (internal errors).
 
