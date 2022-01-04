@@ -1,5 +1,5 @@
 {
-  "name": "flora-errors",
+  "name": "@florajs/errors",
   "version": "2.1.0",
   "description": "Error definitions for Flora",
   "main": "index.js",
@@ -11,6 +11,9 @@
     "index.js"
   ],
   "pre-commit": "test",
+  "keywords": [
+    "florajs"
+  ],
   "author": {
     "name": "BörseGo AG",
     "email": "it@boerse-go.de"
@@ -38,7 +41,7 @@
   "devDependencies": {
     "@types/chai": "^4.3.0",
     "chai": "^4.3.4",
-    "eslint": "^8.5.0",
+    "eslint": "^8.6.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "mocha": "^9.1.3",

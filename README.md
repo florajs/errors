@@ -1,8 +1,8 @@
-# flora-errors
+# @florajs/errors
 
 ![](https://github.com/florajs/errors/workflows/ci/badge.svg)
-[![NPM version](https://img.shields.io/npm/v/flora-errors.svg?style=flat)](https://www.npmjs.com/package/flora-errors)
-[![NPM downloads](https://img.shields.io/npm/dm/flora-errors.svg?style=flat)](https://www.npmjs.com/package/flora-errors)
+[![NPM version](https://img.shields.io/npm/v/@florajs/errors.svg?style=flat)](https://www.npmjs.com/package/@florajs/errors)
+[![NPM downloads](https://img.shields.io/npm/dm/@florajs/errors.svg?style=flat)](https://www.npmjs.com/package/@florajs/errors)
 
 Error definitions for [Flora](https://github.com/florajs/flora).
 
