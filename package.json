@@ -4,12 +4,19 @@
   "description": "Error definitions for Flora",
   "main": "index.js",
   "scripts": {
-    "test": "eslint . && mocha",
+    "test": "eslint . && mocha && node --test ./test/errors.spec.mjs",
     "lint": "eslint ."
   },
   "files": [
-    "index.js"
+    "index.js",
+    "index.mjs",
+    "index.d.mts"
   ],
+  "exports": {
+    "require": "./index.js",
+    "import": "./index.mjs",
+    "types": "./index.d.mts"
+  },
   "pre-commit": "test",
   "keywords": [
     "florajs"
@@ -40,6 +47,7 @@
   },
   "devDependencies": {
     "@types/chai": "^4.3.5",
+    "@types/node": "^22.13.4",
     "chai": "^4.3.7",
     "eslint": "^8.46.0",
     "eslint-config-prettier": "^8.9.0",
