@@ -9,8 +9,15 @@
     "lint": "eslint ."
   },
   "files": [
-    "index.js"
+    "index.js",
+    "index.mjs",
+    "index.d.mts"
   ],
+  "exports": {
+    "require": "./index.js",
+    "import": "./index.mjs",
+    "types": "./index.d.mts"
+  },
   "pre-commit": "test",
   "keywords": [
     "florajs"
@@ -34,12 +41,18 @@
     {
       "name": "Marco Baumgartl",
       "email": "marco.baumgartl@stock3.com"
+    },
+    {
+      "name": "Jan Kaiser",
+      "email": "jan.kaiser@stock3.com"
     }
   ],
   "engines": {
     "node": ">=18"
   },
   "devDependencies": {
+    "@types/node": "^22.13.4",
+    "@typescript-eslint/parser": "^8.24.1",
     "eslint": "^9.8.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
