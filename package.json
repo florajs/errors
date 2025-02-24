@@ -4,7 +4,8 @@
   "description": "Error definitions for Flora",
   "main": "index.js",
   "scripts": {
-    "test": "eslint . && mocha && node --test ./test/errors.spec.mjs",
+    "test": "node --test",
+    "pretest": "npm run lint",
     "lint": "eslint ."
   },
   "files": [
@@ -43,17 +44,14 @@
     }
   ],
   "engines": {
-    "node": ">=16"
+    "node": ">=18"
   },
   "devDependencies": {
-    "@types/chai": "^4.3.5",
     "@types/node": "^22.13.4",
-    "chai": "^4.3.7",
-    "eslint": "^8.46.0",
-    "eslint-config-prettier": "^8.9.0",
-    "eslint-plugin-prettier": "^5.0.0",
-    "mocha": "^10.2.0",
+    "eslint": "^9.8.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
     "pre-commit": "^1.2.2",
-    "prettier": "^3.0.1"
+    "prettier": "^3.3.3"
   }
 }
