@@ -1,7 +1,5 @@
-'use strict';
-
 import { describe, it } from 'node:test';
-import assert from 'assert';
+import assert from 'node:assert';
 import {
     RequestError,
     AuthenticationError,
@@ -24,50 +22,49 @@ function throwError(errorClass) {
 describe('errors', () => {
     describe('RequestError', () => {
         it('has correct class hierarchy (for instanceof)', () => {
-            assert.throws(throwError(RequestError), (error) => {
-                if (!(error instanceof RequestError)) return false;
-                if (!(error instanceof Error)) return false;
-                if (error.message !== 'an error occurred') return false;
-                if (error instanceof ImplementationError) return false;
+            assert.throws(throwError(RequestError), (err) => {
+                assert(err instanceof RequestError);
+                assert(err instanceof Error);
+                assert.strictEqual(err.message, 'an error occurred');
+                assert(!(err instanceof ImplementationError));
                 return true;
             });
         });
 
         it('has correct name', () => {
-            assert.throws(
-                throwError(RequestError),
-                (error) => error.name === 'RequestError',
-                'Error does not have the correct name'
-            );
+            assert.throws(throwError(RequestError), (err) => {
+                assert.strictEqual(err.name, 'RequestError');
+                return true;
+            });
         });
 
         it('has correct code', () => {
-            assert.throws(
-                throwError(RequestError),
-                (error) => error.code === 'ERR_REQUEST_ERROR',
-                'Error does not have the correct code'
-            );
+            assert.throws(throwError(RequestError), (err) => {
+                assert.strictEqual(err.code, 'ERR_REQUEST_ERROR');
+                return true;
+            });
         });
 
         it('has correct stack trace', () => {
             let est;
+
             try {
-                est = new Error('msg').stack;  // indent of "new" must match the "new" in next line
+                est = new Error('msg').stack; // indent of "new" must match the "new" in next line
                 throw new RequestError('msg');
             } catch (e) {
-                // Adjust expected stack:
+                // adjust expected stack-trace:
                 est = est.split('\n');
 
                 // set expected name of error:
                 est[0] = 'Request' + est[0];
 
                 // add 1 to expected line number (identical column number):
-                est[1] = est[1].replace(
-                    /:(\d+):(\d+)\)$/g,
-                    (match, lineNumber, columnNumber) =>
-                        ':' + (parseInt(lineNumber, 10) + 1) + ':' + columnNumber + ')'
-                );
+                est[1] = est[1].replace(/:(\d+):(\d+)\)$/g, (match, lineNumber, columnNumber) => {
+                    return ':' + (parseInt(lineNumber) + 1) + ':' + columnNumber + ')';
+                });
+
                 est = est.join('\n');
+
                 assert.strictEqual(e.stack, est);
             }
         });
@@ -75,153 +72,153 @@ describe('errors', () => {
 
     describe('AuthenticationError', () => {
         it('has correct class hierarchy (for instanceof)', () => {
-            assert.throws(throwError(AuthenticationError), (error) => {
-                if (!(error instanceof AuthenticationError)) return false;
-                if (!(error instanceof Error)) return false;
-                if (error.message !== 'an error occurred') return false;
-                if (error instanceof ImplementationError) return false;
+            assert.throws(throwError(AuthenticationError), (err) => {
+                assert(err instanceof AuthenticationError);
+                assert(err instanceof Error);
+                assert.strictEqual(err.message, 'an error occurred');
+                assert(!(err instanceof ImplementationError));
                 return true;
             });
         });
 
         it('has correct code', () => {
-            assert.throws(
-                throwError(AuthenticationError),
-                (error) => error.code === 'ERR_AUTHENTICATION_ERROR'
-            );
+            assert.throws(throwError(AuthenticationError), (err) => {
+                assert.strictEqual(err.code, 'ERR_AUTHENTICATION_ERROR');
+                return true;
+            });
         });
     });
 
     describe('AuthorizationError', () => {
         it('has correct class hierarchy (for instanceof)', () => {
-            assert.throws(throwError(AuthorizationError), (error) => {
-                if (!(error instanceof AuthorizationError)) return false;
-                if (!(error instanceof Error)) return false;
-                if (error.message !== 'an error occurred') return false;
-                if (error instanceof ImplementationError) return false;
+            assert.throws(throwError(AuthorizationError), (err) => {
+                assert(err instanceof AuthorizationError);
+                assert(err instanceof Error);
+                assert.strictEqual(err.message, 'an error occurred');
+                assert(!(err instanceof ImplementationError));
                 return true;
             });
         });
 
         it('has correct code', () => {
-            assert.throws(
-                throwError(AuthorizationError),
-                (error) => error.code === 'ERR_AUTHORIZATION_ERROR'
-            );
+            assert.throws(throwError(AuthorizationError), (err) => {
+                assert.strictEqual(err.code, 'ERR_AUTHORIZATION_ERROR');
+                return true;
+            });
         });
     });
 
     describe('NotFoundError', () => {
         it('has correct class hierarchy (for instanceof)', () => {
-            assert.throws(throwError(NotFoundError), (error) => {
-                if (!(error instanceof NotFoundError)) return false;
-                if (!(error instanceof Error)) return false;
-                if (error.message !== 'an error occurred') return false;
-                if (error instanceof ImplementationError) return false;
+            assert.throws(throwError(NotFoundError), (err) => {
+                assert(err instanceof NotFoundError);
+                assert(err instanceof Error);
+                assert.strictEqual(err.message, 'an error occurred');
+                assert(!(err instanceof ImplementationError));
                 return true;
             });
         });
 
         it('has correct code', () => {
-            assert.throws(
-                throwError(NotFoundError),
-                (error) => error.code === 'ERR_NOT_FOUND'
-            );
+            assert.throws(throwError(NotFoundError), (err) => {
+                assert.strictEqual(err.code, 'ERR_NOT_FOUND');
+                return true;
+            });
         });
     });
 
     describe('GoneError', () => {
         it('has correct class hierarchy (for instanceof)', () => {
-            assert.throws(throwError(GoneError), (error) => {
-                if (!(error instanceof GoneError)) return false;
-                if (!(error instanceof Error)) return false;
-                if (error.message !== 'an error occurred') return false;
-                if (error instanceof ImplementationError) return false;
+            assert.throws(throwError(GoneError), (err) => {
+                assert(err instanceof GoneError);
+                assert(err instanceof Error);
+                assert.strictEqual(err.message, 'an error occurred');
+                assert(!(err instanceof ImplementationError));
                 return true;
             });
         });
 
         it('has correct code', () => {
-            assert.throws(
-                throwError(GoneError),
-                (error) => error.code === 'ERR_GONE'
-            );
+            assert.throws(throwError(GoneError), (err) => {
+                assert.strictEqual(err.code, 'ERR_GONE');
+                return true;
+            });
         });
     });
 
     describe('ImplementationError', () => {
         it('has correct class hierarchy (for instanceof)', () => {
-            assert.throws(throwError(ImplementationError), (error) => {
-                if (!(error instanceof ImplementationError)) return false;
-                if (!(error instanceof Error)) return false;
-                if (error.message !== 'an error occurred') return false;
-                if (error instanceof RequestError) return false;
+            assert.throws(throwError(ImplementationError), (err) => {
+                assert(err instanceof ImplementationError);
+                assert(err instanceof Error);
+                assert.strictEqual(err.message, 'an error occurred');
+                assert(!(err instanceof RequestError));
                 return true;
             });
         });
 
         it('has correct code', () => {
-            assert.throws(
-                throwError(ImplementationError),
-                (error) => error.code === 'ERR_IMPLEMENTATION_ERROR'
-            );
+            assert.throws(throwError(ImplementationError), (err) => {
+                assert.strictEqual(err.code, 'ERR_IMPLEMENTATION_ERROR');
+                return true;
+            });
         });
     });
 
     describe('DataError', () => {
         it('has correct class hierarchy (for instanceof)', () => {
-            assert.throws(throwError(DataError), (error) => {
-                if (!(error instanceof DataError)) return false;
-                if (!(error instanceof Error)) return false;
-                if (error.message !== 'an error occurred') return false;
-                if (error instanceof ImplementationError) return false;
+            assert.throws(throwError(DataError), (err) => {
+                assert(err instanceof DataError);
+                assert(err instanceof Error);
+                assert.strictEqual(err.message, 'an error occurred');
+                assert(!(err instanceof ImplementationError));
                 return true;
             });
         });
 
         it('has correct code', () => {
-            assert.throws(
-                throwError(DataError),
-                (error) => error.code === 'ERR_DATA_ERROR'
-            );
+            assert.throws(throwError(DataError), (err) => {
+                assert.strictEqual(err.code, 'ERR_DATA_ERROR');
+                return true;
+            });
         });
     });
 
     describe('ConnectionError', () => {
         it('has correct class hierarchy (for instanceof)', () => {
-            assert.throws(throwError(ConnectionError), (error) => {
-                if (!(error instanceof ConnectionError)) return false;
-                if (!(error instanceof Error)) return false;
-                if (error.message !== 'an error occurred') return false;
-                if (error instanceof ImplementationError) return false;
+            assert.throws(throwError(ConnectionError), (err) => {
+                assert(err instanceof ConnectionError);
+                assert(err instanceof Error);
+                assert.strictEqual(err.message, 'an error occurred');
+                assert(!(err instanceof ImplementationError));
                 return true;
             });
         });
 
         it('has correct code', () => {
-            assert.throws(
-                throwError(ConnectionError),
-                (error) => error.code === 'ERR_CONNECTION_ERROR'
-            );
+            assert.throws(throwError(ConnectionError), (err) => {
+                assert.strictEqual(err.code, 'ERR_CONNECTION_ERROR');
+                return true;
+            });
         });
     });
 
     describe('ValidationError', () => {
         it('has correct class hierarchy (for instanceof)', () => {
-            assert.throws(throwError(ValidationError), (error) => {
-                if (!(error instanceof ValidationError)) return false;
-                if (!(error instanceof RequestError)) return false;
-                if (error instanceof ImplementationError) return false;
-                if (error.message !== 'an error occurred') return false;
+            assert.throws(throwError(ValidationError), (err) => {
+                assert(err instanceof ValidationError);
+                assert(err instanceof Error);
+                assert.strictEqual(err.message, 'an error occurred');
+                assert(!(err instanceof ImplementationError));
                 return true;
             });
         });
 
         it('has correct code', () => {
-            assert.throws(
-                throwError(ValidationError),
-                (error) => error.code === 'ERR_VALIDATION_ERROR'
-            );
+            assert.throws(throwError(ValidationError), (err) => {
+                assert.strictEqual(err.code, 'ERR_VALIDATION_ERROR');
+                return true;
+            });
         });
 
         it('passes through validation property', () => {
@@ -229,7 +226,10 @@ describe('errors', () => {
                 () => {
                     throw new ValidationError('foo', 'bar');
                 },
-                (error) => error.validation === 'bar'
+                (err) => {
+                    assert(err.validation, 'bar');
+                    return true;
+                }
             );
         });
     });
@@ -282,20 +282,19 @@ describe('errors', () => {
 
         it('always passes through stack-trace when exposeErrors = true', () => {
             const error = format(new NotFoundError('foobar not found'), { exposeErrors: true });
-            assert(
-                Array.isArray(error.stack),
-                'Expected stack to be an array when exposeErrors is true'
-            );
+            assert(Array.isArray(error.stack));
         });
 
         it('merge additional information from error\'s "info" property', () => {
             const error = new ConnectionError('Cannot connect to api.example.com');
+
             error.info = { customProp: 'foo', message: 'bar', stack: 'foobar' };
             const formatted = format(error, { exposeErrors: true });
+
             assert.strictEqual(formatted.customProp, 'foo');
-            // Standard properties should not be overwritten.
-            assert.notStrictEqual(formatted.message, 'bar');
-            assert.notStrictEqual(formatted.stack, 'foobar');
+            // don't overwrite standard properties
+            assert.notEqual(formatted.message, 'bar');
+            assert.notEqual(formatted.stack, 'foobar');
         });
 
         it('passes through validation property for ValidationError', () => {

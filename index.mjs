@@ -1,5 +1,3 @@
-'use strict';
-
 export class FloraError extends Error {
     constructor(message, ...args) {
         super(message, ...args);
