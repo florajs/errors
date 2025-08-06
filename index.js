@@ -100,8 +100,8 @@ class ValidationError extends RequestError {
  * Converts an error object to a stringifyable object format for use
  * in Flora responses.
  *
- * @param {FloraError} err object
- * @param {Object=} options
+ * @param {FloraError} Error object
+ * @param {{ exposeErrors?: boolean }} [options]
  */
 function format(err, options) {
     const error = { message: 'Internal Server Error' };
